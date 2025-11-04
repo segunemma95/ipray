@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register – iPray Global</title>
-  <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - iPray Global</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <header>
-    <h1>Register for iPray Global Conference</h1>
-    <a href="/">⬅ Back to Home</a>
-  </header>
 
-  <section class="form-container">
-    <form id="prayerForm">
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email Address" required />
-      <input type="text" name="country" placeholder="Country" required />
-      <button type="submit">Register</button>
+<body>
+<header>
+    <nav class="navbar">
+        <h2 class="logo">iPray Global</h2>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a class="active" href="register.html">Register</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-section">
+    <h1>Register to Join the Prayer Chain</h1>
+
+    <form id="registerForm">
+        <input type="text" id="name" placeholder="Full Name" required><br>
+        <input type="email" id="email" placeholder="Email Address" required><br>
+        <button type="submit">Submit</button>
     </form>
 
-    <p id="statusMsg"></p>
-  </section>
+    <p id="message"></p>
+</section>
 
-  <script>
-    const form = document.getElementById("prayerForm");
-    const statusMsg = document.getElementById("statusMsg");
+<footer>
+    <p>© 2025 iPray Global | All Rights Reserved</p>
+</footer>
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      statusMsg.innerText = "Submitting...";
+<script src="assets/js/main.js"></script>
 
-      const data = new FormData(form);
-      const response = await fetch(
-        "YOUR_GOOGLE_SCRIPT_WEB_URL",
-        { method: "POST", body: data }
-      );
-
-      if (response.ok) {
-        statusMsg.innerText = "✅ Registration Successful! Thank you.";
-        form.reset();
-      } else {
-        statusMsg.innerText = "❌ Something went wrong. Try again.";
-      }
-    });
-  </script>
 </body>
 </html>
