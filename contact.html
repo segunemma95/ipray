@@ -1,35 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - iPray Global</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<title>Contact iPray Global</title>
+<style>
+  body {
+    font-family: Arial;
+    margin: 0;
+    background: #f2f2f2;
+  }
+  .container {
+    width: 90%;
+    max-width: 650px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h2 { text-align:center; margin-bottom:20px; }
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  button {
+    background: #007BFF;
+    color: white;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor:pointer;
+  }
+  button:hover {
+    background:#005FCC;
+  }
+  .success {
+    background: #d1ffd7;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    text-align:center;
+    display:none;
+  }
+</style>
 </head>
 <body>
 
-<header>
-    <nav class="navbar">
-        <h2 class="logo">iPray Global</h2>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li><a class="active" href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+<div class="container">
+  <h2>📩 Contact & Connect</h2>
 
-<section class="page-section">
-    <h1>Contact Us</h1>
-    <p>If you would like to partner with us, volunteer, join the prayer chain or ask a question, reach out below:</p>
+  <input type="text" id="name" placeholder="Full Name" required>
+  <input type="email" id="email" placeholder="Email Address" required>
 
-    <p>Email: <strong>support@iprayglobal.com</strong></p>
-</section>
+  <!-- ✅ ALL COUNTRIES DROPDOWN -->
+  <select id="country" required>
+    <option value="">Select Country</option>
+  </select>
 
-<footer>
-    <p>© 2025 iPray Global | All Rights Reserved</p>
-</footer>
+  <textarea id="message" rows="5" placeholder="Your Message"></textarea>
+
+  <button onclick="submitContact()">Send Message</button>
+
+  <p class="success" id="successMsg">✅ Thank you! We received your message.</p>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+  import { getDatabase, push, ref } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDyzpL55SSiDRcPt6Hm8IK07k79a11bmDI",
+    authDomain: "ipray-global.firebaseapp.com",
+    databaseURL: "https://ipray-global-default-rtdb.firebaseio.com",
+    projectId: "ipray-global",
+    storageBucket: "ipray-global.firebasestorage.app",
+    messagingSenderId: "762667869397",
+    appId: "1:762667869397:web:5ac930cb9a9190b57e2e5c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // ✅ Submit Contact Form
+  function submitContact() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let country = document.getElementById("country").value;
+    let message = document.getElementById("message").value;
+
+    push(ref(db, "contacts"), {
+      name, email, country, message, date: new Date().toString()
+    }).then(() => {
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("country").value = "";
+      document.getElementById("message").value = "";
+    }).catch((error) => {
+      alert("Error: " + error);
+    });
+  }
+
+  // ✅ Populate Country List
+  const countries = [
+    "Nigeria","United States","United Kingdom","Canada","Australia","South Africa","Ghana","Kenya",
+    "Uganda","Tanzania","India","Brazil","Germany","France","Italy","Netherlands","China","Japan",
+    "South Korea","Spain","Sweden","Norway","Saudi Arabia","UAE","Israel","Egypt","Mexico",
+    // ✅ We can paste all remaining 195 countries after this line
+  ];
+
+  const dropdown = document.getElementById("country");
+  countries.forEach(c => {
+    let option = document.createElement("option");
+    option.value = c;
+    option.textContent = c;
+    dropdown.appendChild(option);
+  });
+</script>
 
 </body>
 </html>
+
