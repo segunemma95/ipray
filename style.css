@@ -1,37 +1,59 @@
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #000;
-    color: #fff;
-    text-align: center;
-    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    background:#f3f7fa;
 }
 
-header h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
+.navbar {
+    background:#1a237e !important;
+    padding:15px;
 }
 
-header p {
-    font-size: 20px;
-    color: #ffdf6c;
+.navbar-brand img {
+    height:55px;
 }
 
-input, button {
-    padding: 12px;
-    margin: 8px;
-    width: 250px;
-    font-size: 16px;
-    border-radius: 5px;
+.hero {
+    background: linear-gradient(to bottom right, #1a237e, #4caf50);
+    color:white;
+    text-align:center;
+    padding:140px 25px;
+    border-bottom-left-radius:90px;
+    border-bottom-right-radius:90px;
 }
 
-button {
-    background: #ffdf6c;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
+.hero h1 {
+    font-size:42px;
+    font-weight:700;
 }
 
-button:hover {
-    background: #ffc300;
+.btn-main {
+    padding:15px 35px;
+    background:#ffeb3b;
+    color:black;
+    border-radius:30px;
+    font-weight:bold;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn-main:hover {
+    background:white;
+}
+
+.section {
+    padding:70px 20px;
+}
+
+.card-box {
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.15);
+    margin-bottom:25px;
+}
+footer {
+    background:#0e1448;
+    color:white;
+    padding:30px;
+    text-align:center;
 }
